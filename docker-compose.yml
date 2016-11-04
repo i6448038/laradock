@@ -4,7 +4,7 @@
 
 # PHP + NGINX Container #----------------------------------
 php-nginx:
-  image: chuanty/phpnginx:7.0.5-fpm_1.9.13
+  image: chuanty/phpnginx:2.0
   container_name: php-nginx
   ports:
     - "80:80"
@@ -21,18 +21,17 @@ php-nginx:
     - ELASTICSEARCH_HOST=elasticsearch
     - ELASTICSEARCH_PORT=9200
   privileged: true
-  extra_hosts:
-    - "laravel.dev:xxx.xxx.xxx.xxx"
 
 # MySQL Container #----------------------------------------
 mysql:
-  image: chuanty/mysql:5.5
+  image: mysql:5.6
   container_name: mysql
   ports:
     - "3306:3306"
   volumes_from:
     - data
   environment:
+    MYSQL_ROOT_PASSWORD: homestead
     MYSQL_DATABASE: homestead
     MYSQL_USER: homestead
     MYSQL_PASSWORD: secret
@@ -53,7 +52,7 @@ redis:
 
 # Elasticsearch Container #--------------------------------
 elasticsearch:
-  image: chuanty/elasticsearch:2.2
+  image: chuanty/elasticsearch:2.4
   container_name: elasticsearch
   ports:
     - "9200:9200"
