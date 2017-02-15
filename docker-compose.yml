@@ -1,14 +1,14 @@
-###########################################################
+#########################################################
 #      MAINTAINER: Mahmoud Zalt <mahmoud@zalt.me>         #
 ###########################################################
 
 # PHP + NGINX Container #----------------------------------
 php-nginx:
-  image: chuanty/phpnginx:2.1
+  image: chuanty/phpnginx:2.0
   container_name: php-nginx
   ports:
-    - "80:80"
-    - "9001:9001"
+  - "80:80"
+  - "9001:9001"
   volumes:
     - ./settings/nginx:/etc/nginx/sites-available
     - ../:/var/www
@@ -54,11 +54,19 @@ redis:
 
 # Elasticsearch Container #--------------------------------
 elasticsearch:
-  image: chuanty/elasticsearch:5.0
+  image: chuanty/elasticsearch:5.1.2
   container_name: elasticsearch
   ports:
     - "9200:9200"
     - "9300:9300"
+  environment:
+    - cluster.name=shaka_es-cluster
+    - bootstrap.memory_lock=true
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    - "discovery.zen.ping.unicast.hosts=elasticsearch"
+  mem_limit: 1g
+  volumes:
+    - ./data/es:/usr/share/elasticsearch/data
 
 # Data Volume Container #----------------------------------
 data:
