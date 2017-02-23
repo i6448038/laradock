@@ -22,7 +22,6 @@ php-nginx:
     - REDIS_PORT=6379
     - ELASTICSEARCH_HOST=elasticsearch
     - ELASTICSEARCH_PORT=9200
-  #privileged: true
 
 # MySQL Container #----------------------------------------
 mysql:
@@ -37,7 +36,6 @@ mysql:
     MYSQL_DATABASE: homestead
     MYSQL_USER: homestead
     MYSQL_PASSWORD: secret
-  #privileged: true
 
 # Redis Container #----------------------------------------
 redis:
@@ -50,7 +48,6 @@ redis:
   volumes:
     - ./logs/redis:/var/log/redis
   restart: always
-  #privileged: true
 
 # Elasticsearch Container #--------------------------------
 elasticsearch:
@@ -76,12 +73,3 @@ data:
     - /var/lib/mysql
     - /var/lib/redis
 
-# Beanstalkd Container #-----------------------------------
-# beanstalkd:
-#   image: laradock/beanstalkd:latest
-#   container_name: beanstalkd
-#   ports:
-#     - "11300:11300"
-#   privileged: true
-
-#----------------------------------------------------------
